@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """This is the file storage class for AirBnB"""
 import json
 import datetime
@@ -66,6 +67,7 @@ class FileStorage:
             del self.__objects["{}.{}".format(type(obj).__name__, obj.id)]
         except (AttributeError, KeyError):
             pass
+
     def close(self):
         """Deserializes the JSON file to objects"""
         self.reload()
