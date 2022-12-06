@@ -61,14 +61,11 @@ class FileStorage:
             pass
 
     def delete(self, obj=None):
-        """Deletes obj if it's inside the attribute __objects
-        """
-        if obj:
-            key = "{}.{}".format(type(obj).__name__, obj.id)
-            if (key, obj) in self.__objects.items():
-                self.__objects.pop(key, None)
-        self.save()
-
+        """Delete a given object from __objects, if it exists."""
+        try:
+            del self.__objects["{}.{}".format(type(obj).__name__, obj.id)]
+        except (AttributeError, KeyError):
+            pass
     def close(self):
         """Deserializes the JSON file to objects"""
         self.reload()
